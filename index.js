@@ -36,8 +36,7 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
 
-    const paintingsCollection = client.db('paintingsDB').collection('paintings');
-    const catCollection = client.db('catDB').collection('cat');
+    
 
     app.post('/allcat', async(req, res) =>{
       const newCat = req.body;
@@ -53,7 +52,12 @@ async function run() {
     res.send(result)
     })
 
-    
+    app.get('/allcat/:cat', async(req, res) =>{
+      const cat = req.params.cat;
+      const query = {category: cat}
+      const result = await catCollection.findOne(query)
+      res.send(result)
+   })
 
 
     app.get('/paintings', async(req, res) =>{
