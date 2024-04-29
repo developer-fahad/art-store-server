@@ -61,11 +61,7 @@ async function run() {
    })
 
 
-    app.get('/paintings', async(req, res) =>{
-        const cursor = paintingsCollection.find();
-        const result = await cursor.toArray();
-        res.send(result)
-    })
+    
 
 
     app.get('/paintings/:id', async(req, res) =>{
@@ -110,7 +106,12 @@ async function run() {
     })
 
 
-    
+    app.delete('/paintings/:id', async(req, res) =>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)}
+        const result = await paintingsCollection.deleteOne(query);
+        res.send(result);
+    })
 
     
     // Send a ping to confirm a successful connection
