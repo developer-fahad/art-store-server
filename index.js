@@ -7,8 +7,9 @@ const port = process.env.PORT || 5000;
 
 // middleware
 // https://art-store-53fcb.web.app
+// art-store-server.vercel.app/paintings
 const corsOptions = {
-    origin: ['http://localhost:5173', 'http://localhost:5174',''],
+    origin: ['http://localhost:5173', 'http://localhost:5174','https://art-store-53fcb.web.app'],
     credentials: true,
     optionSuccessStatus: 200,
   }
@@ -51,6 +52,13 @@ async function run() {
     const result = await cursor.toArray();
     res.send(result)
     })
+
+    app.get('/allcat/:cat', async(req, res) =>{
+      const cat = req.params.cat;
+      const query = {category: cat}
+      const result = await catCollection.findOne(query)
+      res.send(result)
+   })
 
 
     app.get('/paintings', async(req, res) =>{
