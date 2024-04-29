@@ -53,15 +53,14 @@ async function run() {
     res.send(result)
     })
 
-    app.get('/allcat/:cat', async(req, res) =>{
-      const cat = req.params.cat;
-      const query = {category: cat}
-      const result = await catCollection.findOne(query)
-      res.send(result)
-   })
-
-
     
+
+
+    app.get('/paintings', async(req, res) =>{
+        const cursor = paintingsCollection.find();
+        const result = await cursor.toArray();
+        res.send(result)
+    })
 
 
     app.get('/paintings/:id', async(req, res) =>{
