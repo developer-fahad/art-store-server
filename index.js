@@ -36,7 +36,8 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
 
-    
+    const paintingsCollection = client.db('paintingsDB').collection('paintings');
+    const catCollection = client.db('catDB').collection('cat');
 
     app.post('/allcat', async(req, res) =>{
       const newCat = req.body;
@@ -75,12 +76,7 @@ async function run() {
     })
 
 
-    app.post('/paintings', async(req, res) =>{
-        const newPaintings = req.body;
-        console.log(newPaintings);
-        const result = await paintingsCollection.insertOne(newPaintings);
-        res.send(result)
-    })
+    
 
 
     app.put('/paintings/:id', async(req, res) =>{
